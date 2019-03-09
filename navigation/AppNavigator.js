@@ -1,10 +1,39 @@
 import React from 'react';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+import HomeScreen from '../screens/HomeScreen';
+import ResultScreen from '../screens/ResultScreen';
+//import MainTabNavigator from './MainTabNavigator';
 
-import MainTabNavigator from './MainTabNavigator';
+const Stack = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: () => ({
+        title: 'ストップウォッチ',
+      }),
+    },
+    Result: {
+      screen: ResultScreen,
+      navigationOptions: () => ({
+        title: 'リザルト画面（仮）',
+      }),
+    },
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
 
-export default createAppContainer(createSwitchNavigator({
-  // You could add another route here for authentication.
-  // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-  Main: MainTabNavigator,
-}));
+const AppContainer = createAppContainer(Stack);
+
+export default class AppNavigator extends React.Component {
+  render() {
+    return (
+      <AppContainer
+        ref={nav => {
+          this.navigator = nav;
+        }}
+        />
+    );
+  }
+}

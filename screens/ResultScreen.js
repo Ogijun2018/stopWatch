@@ -1,15 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export default class HomeScreen extends React.Component {
+export default class DetailScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Home Screen</Text>
+        <Text>Detail Screen</Text>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Result")}
+          onPress={() => this.props.navigation.navigate("Home")}
         >
-          <Text>Go to Result Screen</Text>
+          <Text>Go to Home Screen</Text>
         </TouchableOpacity>
       </View>
     );
