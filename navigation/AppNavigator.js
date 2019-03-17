@@ -27,7 +27,7 @@ const Stack = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Watch',
   }
 );
 

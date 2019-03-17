@@ -1,73 +1,53 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions } from "react-native";
 import { Stopwatch, Timer } from 'react-native-stopwatch-timer';
 
+const {height, width} = Dimensions.get('window');
+
 export default class StopWatch extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          timerStart: false,
-          stopwatchStart: false,
-          totalDuration: 90000,
-          timerReset: false,
-          stopwatchReset: false,
-        };
-        this.toggleTimer = this.toggleTimer.bind(this);
-        this.resetTimer = this.resetTimer.bind(this);
-        this.toggleStopwatch = this.toggleStopwatch.bind(this);
-        this.resetStopwatch = this.resetStopwatch.bind(this);
-      }
+    _renderTimers() {
+      return(
+        <View style={styles.timerWrapper}>
+          <Text>00:00.95</Text>
+          <Text>00:02.95</Text>
+        </View>
+      );
+    }
 
-
-    toggleTimer() {
-        this.setState({timerStart: !this.state.timerStart, timerReset: false});
-      }
-     
-      resetTimer() {
-        this.setState({timerStart: false, timerReset: true});
-      }
-     
-      toggleStopwatch() {
-        this.setState({stopwatchStart: !this.state.stopwatchStart, stopwatchReset: false});
-      }
-     
-      resetStopwatch() {
-        this.setState({stopwatchStart: false, stopwatchReset: true});
-      }
-
-      getFormattedTime(time) {
-        this.currentTime = time;
-    };
+    _rednerButtons(){
+      return(
+        <View style={styles.buttonWrapper}>
+          <Text>Lap</Text>
+          <Text>Start</Text>
+        </View>
+      );
+    }
 
     render(){
         return(
-        <View>
-            <Stopwatch 
-            msecs start={this.state.stopwatchStart}
-            reset={this.state.stopwatchReset}
-            options={this.options}
-            getTime={this.getFormattedTime} />
-          <TouchableOpacity onPress={this.toggleStopwatch}>
-            <Text style={{fontSize: 30}}>{!this.state.stopwatchStart ? "Start" : "Stop"}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.resetStopwatch}>
-            <Text style={{fontSize: 30}}>Reset</Text>
-          </TouchableOpacity>
+        <View style={styles.container}>
+          <View style={styles.top}>
+            {this._renderTimers()}
+          </View>
+          <View style={styles.bottom}>
+            {this._rednerButtons()}
+          </View>
         </View>
         );
     }
-
-    options = {
-        container: {
-          backgroundColor: '#000',
-          padding: 5,
-          borderRadius: 5,
-          width: 220,
-        },
-        text: {
-          fontSize: 30,
-          color: '#FFF',
-          marginLeft: 7,
-        }
-      };
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+  },
+  timerWrapper: {
+    backgroundColor: '#FFFFFF',
+  },
+  top: {
+    flex: 1,
+  },
+  bottom: {
+    flex: 1,
+  },
+});
