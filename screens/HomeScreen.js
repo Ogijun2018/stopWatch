@@ -16,8 +16,8 @@ export default class HomeScreen extends React.Component {
     render(){
         const { navigate } = this.props.navigation;
         return(
-            <React.Fragment>
-            <Text>ストップウォッチの個数を選択してください</Text>
+            <View style={styles.container}>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>ストップウォッチの個数を選択してください</Text>
             <Picker
           style={[styles.picker]} itemStyle={styles.pickerItem}
           selectedValue={this.state.number}
@@ -30,20 +30,38 @@ export default class HomeScreen extends React.Component {
           <Picker.Item label="5" value={5} />
           <Picker.Item label="6" value={6} />
         </Picker>
-            <TouchableOpacity onPress={() => navigate('Watch', this.state.number)}>
-                <Text>Go to StopWatch</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', this.state.number)}>
+                <Text style={styles.startText}>開始</Text>
             </TouchableOpacity>
-            </React.Fragment>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     picker: {
-        width: 200,
+        width: 300,
         backgroundColor: '#FFF',
     },
     pickerItem: {
+        fontSize: 20,
         color: 'blue',
+    },
+    startText: {
+        fontSize: 30,
+        fontWeight: 'bold',
+    },
+    button: {
+        width: 200,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#C0C0C0',
+        borderRadius: 20,
     },
 });

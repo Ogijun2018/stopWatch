@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import {
-  StyleSheet, Text, View, ScrollView, TouchableOpacity, Dimensions
+  StyleSheet, Text, View, ScrollView, TouchableOpacity, Dimensions, TextInput
   } from 'react-native'
 import moment from 'moment'
 
-const { height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 function Timer({ interval, style }) {
   const pad = (n) => n < 10 ? '0' + n : n
@@ -13,7 +13,7 @@ function Timer({ interval, style }) {
   return (
     <View style={styles.timerContainer}>
       <Text style={style}>{pad(duration.minutes())}:</Text>
-      <Text style={style}>{pad(duration.seconds())},</Text>
+      <Text style={style}>{pad(duration.seconds())}.</Text>
       <Text style={style}>{pad(centiseconds)}</Text>
     </View>
   )
@@ -77,17 +77,23 @@ function ButtonsRow({ children }) {
   )
 }
 export default class App extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
       start: 0,
       now: 0,
       laps: [ ],
+      inputValue: "名前を記入",
     }
   }
   componentWillUnmount() {
     clearInterval(this.timer)
   }
+
+  _handleTextChange = inputValue => {
+    this.setState({ inputValue });
+  };
 
   start = () => {
     const now = new Date().getTime()
@@ -98,7 +104,7 @@ export default class App extends Component {
     })
     this.timer = setInterval(() => {
       this.setState({ now: new Date().getTime()})
-    }, 100)
+    }, 10)
   }
   
   lap = () => {
@@ -137,13 +143,18 @@ export default class App extends Component {
     })
     this.timer = setInterval(() => {
       this.setState({ now: new Date().getTime()})
-    }, 100)
+    }, 10)
   }
   render() {
     const { now, start, laps } = this.state
     const timer = now - start
     return (
       <View style={styles.container}>
+        <TextInput
+          value={this.state.inputValue}
+          onChangeText={this._handleTextChange}
+          style={{ width: width / 2, height: 30, fontSize: 20,}}
+        />
         <Timer
           interval={laps.reduce((total, curr) => total + curr, 0) + timer}
           style={styles.timer}
@@ -207,21 +218,26 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //flex: 1,
+    //backgroundColor: 'white',
+    //alignItems: 'center',
+    //justifyContent: 'center',
+    width: width / 2,
+    height: height / 3 - 30,
     paddingHorizontal: 20,
+    borderWidth: 2,
+    borderColor: '#D3D3D3',
+    borderRadius: 20,
   },
   timer: {
     color: 'black',
-    fontSize: 50,
-    fontWeight: '200',
-    width: 80,
+    fontSize: 40,
+    width: 60,
+    paddingBottom: 5,
   },
   button: {
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     borderRadius: 40,
     justifyContent: 'center',
     alignItems: 'center',
@@ -230,8 +246,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   buttonBorder: {
-    width: 76,
-    height: 76,
+    width: 60,
+    height: 60,
     borderRadius: 38,
     borderWidth: 1,
     justifyContent: 'center',
