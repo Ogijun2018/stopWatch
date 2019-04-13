@@ -145,15 +145,37 @@ export default class App extends Component {
       this.setState({ now: new Date().getTime()})
     }, 10)
   }
+  sum = (arr) => {
+    let sum = 0;
+    arr.forEach(function(elm){
+      sum += elm;
+    });
+    return sum;
+  };
+
+  /**
+ * ミリ秒を時分秒へ変換
+ * ms ミリ秒
+ */
+  computeDuration = (ms) => {
+  var h = String(Math.floor(ms / 3600000) + 100).substring(1);
+  var m = String(Math.floor((ms - h * 3600000)/60000)+ 100).substring(1);
+  var s = String(Math.round((ms - h * 3600000 - m * 60000)/1000)+ 100).substring(1);
+  return h+':'+m+':'+s;
+}
+
   render() {
     const { now, start, laps } = this.state
     const timer = now - start
+    //laps[1]..."Lap"を押した時の一番上のラップ
+    //lapForc今までのラップタイム)+(最新のラップタイム)*(残りの周数)
+    let lapForecast = this.computeDuration(this.sum(laps.slice(1)) + laps[1] * (12.5 - laps.slice(1).length));
     return (
       <View style={styles.container}>
         <TextInput
           value={this.state.inputValue}
           onChangeText={this._handleTextChange}
-          style={{ width: width / 2, height: 30, fontSize: 20,}}
+          style={{ width: width / 2, height: 30, fontSize: 20, fontWeight: 'bold',}}
         />
         <Timer
           interval={laps.reduce((total, curr) => total + curr, 0) + timer}
@@ -210,6 +232,8 @@ export default class App extends Component {
             />
           </ButtonsRow>
         )}
+        <Text style={{fontSize: 15}}>
+          Lap{laps.slice(1).length}のペースでいくと{laps.slice(1).length > 0 && lapForecast}</Text>
         <LapsTable laps={laps} timer={timer}/>
       </View>
     )
@@ -218,12 +242,8 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
-    //backgroundColor: 'white',
-    //alignItems: 'center',
-    //justifyContent: 'center',
     width: width / 2,
-    height: height / 3 - 30,
+    height: height / 2 - 30,
     paddingHorizontal: 20,
     borderWidth: 2,
     borderColor: '#D3D3D3',
