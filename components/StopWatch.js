@@ -84,7 +84,6 @@ export default class App extends Component {
       start: 0,
       now: 0,
       laps: [ ],
-      inputValue: "名前を記入",
     }
   }
   componentWillUnmount() {
@@ -164,17 +163,28 @@ export default class App extends Component {
   return h+':'+m+':'+s;
 }
 
+  foreCast = (laps, distance) => {
+    let howmanyAround = distance / 400;
+    return(
+    this.computeDuration(this.sum(laps.slice(1)) + laps[1] * (howmanyAround - laps.slice(1).length))
+    );
+  }
+
   render() {
+    const lap = this.props.lap;
+    const distance = this.props.distance;
     const { now, start, laps } = this.state
     const timer = now - start
     //laps[1]..."Lap"を押した時の一番上のラップ
     //lapForc今までのラップタイム)+(最新のラップタイム)*(残りの周数)
-    let lapForecast = this.computeDuration(this.sum(laps.slice(1)) + laps[1] * (12.5 - laps.slice(1).length));
+    let lapForecast = this.foreCast(laps, distance);
+    let lapsLeft = (distance / 400) - laps.slice(1).length;
     return (
       <View style={styles.container}>
         <TextInput
           value={this.state.inputValue}
           onChangeText={this._handleTextChange}
+          placeholder="名前を記入"
           style={{ width: width / 2, height: 30, fontSize: 20, fontWeight: 'bold',}}
         />
         <Timer
@@ -232,8 +242,12 @@ export default class App extends Component {
             />
           </ButtonsRow>
         )}
+        {/* laps.slice(1).lengthはラップ数 */}
+        {distance !== 0 && (
         <Text style={{fontSize: 15}}>
-          Lap{laps.slice(1).length}のペースでいくと{laps.slice(1).length > 0 && lapForecast}</Text>
+          {distance}mまであと{lapsLeft > 0 ? lapsLeft : "0"}周
+          Lap{laps.slice(1).length}のペースでいくと{laps.slice(1).length > 0 && lapsLeft > 0 ? lapForecast : ""}</Text>
+          )}
         <LapsTable laps={laps} timer={timer}/>
       </View>
     )

@@ -5,10 +5,11 @@ import StopWatch from '../components/StopWatch';
 export default class SWScreen extends React.Component {
     render() {
       let StopWatches = [];
-      const count = this.props.navigation.state.params;
+      const count = this.props.navigation.state.params.count;
+      const lapNum = this.props.navigation.state.params.lap;
       for(let i = 0; i < count; i++){
         StopWatches.push(
-          <StopWatch key={i} count={count}></StopWatch>
+          <StopWatch key={i} count={count} distance={lapNum}></StopWatch>
         );
       }
 

@@ -9,7 +9,8 @@ export default class HomeScreen extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            number: 1,
+            stopWatchNumber: 1,
+            lapNumber: 5000,
         }
     }
 
@@ -20,15 +21,34 @@ export default class HomeScreen extends React.Component {
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>ストップウォッチの個数を選択してください</Text>
             <Picker
           style={[styles.picker]} itemStyle={styles.pickerItem}
-          selectedValue={this.state.number}
-          onValueChange={(itemValue) => this.setState({number: itemValue})}
+          selectedValue={this.state.stopWatchNumber}
+          onValueChange={(itemValue) => this.setState({stopWatchNumber: itemValue})}
         >
           <Picker.Item label="1" value={1} />
           <Picker.Item label="2" value={2} />
           <Picker.Item label="3" value={3} />
           <Picker.Item label="4" value={4} />
         </Picker>
-            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', this.state.number)}>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>何mのラップをとるか選択してください</Text>
+            <Picker
+          style={[styles.picker]} itemStyle={styles.pickerItem}
+          selectedValue={this.state.lapNumber}
+          onValueChange={(itemValue) => this.setState({lapNumber: itemValue})}
+        >
+            <Picker.Item label="なし" value={0}/>
+          <Picker.Item label="1000m" value={1000} />
+          <Picker.Item label="1500m" value={1500} />
+          <Picker.Item label="2000m" value={2000} />
+          <Picker.Item label="3000m" value={3000} />
+          <Picker.Item label="4000m" value={4000} />
+          <Picker.Item label="5000m" value={5000} />
+          <Picker.Item label="6000m" value={6000} />
+          <Picker.Item label="7000m" value={7000} />
+          <Picker.Item label="8000m" value={8000} />
+          <Picker.Item label="9000m" value={9000} />
+          <Picker.Item label="10000m" value={10000} />
+        </Picker>
+            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', {count: this.state.stopWatchNumber, lap: this.state.lapNumber} )}>
                 <Text style={styles.startText}>開始</Text>
             </TouchableOpacity>
             </View>
