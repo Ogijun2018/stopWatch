@@ -1,4 +1,4 @@
-#StopWatch For UECTF manager
+# StopWatch For UECTF manager
 UECTFのマネさん用ストップウォッチアプリ
 随時更新予定。
 
