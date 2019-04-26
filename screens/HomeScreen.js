@@ -11,6 +11,7 @@ export default class HomeScreen extends React.Component {
         this.state = {
             stopWatchNumber: 1,
             lapNumber: 5000,
+            multipleMode: 1,
         }
     }
 
@@ -48,7 +49,16 @@ export default class HomeScreen extends React.Component {
           <Picker.Item label="9000m" value={9000} />
           <Picker.Item label="10000m" value={10000} />
         </Picker>
-            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', {count: this.state.stopWatchNumber, lap: this.state.lapNumber} )}>
+        <Text style={{fontSize: 18, fontWeight: 'bold'}}>ストップウォッチを同時スタートするか、単発で使うか選択</Text>
+        <Picker
+          style={[styles.picker]} itemStyle={styles.pickerItem}
+          selectedValue={this.state.multipleMode}
+          onValueChange={(itemValue) => this.setState({multipleMode: itemValue})}
+        >
+          <Picker.Item label="複数モード" value={1} />
+          <Picker.Item label="単発モード" value={2} />
+        </Picker>
+            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', {count: this.state.stopWatchNumber, lap: this.state.lapNumber, multiple: this.state.multipleMode} )}>
                 <Text style={styles.startText}>開始</Text>
             </TouchableOpacity>
             </View>

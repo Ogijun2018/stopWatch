@@ -34,6 +34,10 @@ const Stack = createStackNavigator(
 const AppContainer = createAppContainer(Stack);
 
 export default class AppNavigator extends React.Component {
+  state = {
+    start: false,
+  }
+
   render() {
     return (
       <AppContainer
