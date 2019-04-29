@@ -30,9 +30,9 @@ export default class SWScreen extends React.Component {
 
       return(
       <View style={styles.container}>
-      <TouchableOpacity disabled={this.state.disabled} onPress={this._onPressButton}>
+      {/* <TouchableOpacity disabled={this.state.disabled} onPress={this._onPressButton}>
       <Text>Start</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       {StopWatches}
       </View>
       );

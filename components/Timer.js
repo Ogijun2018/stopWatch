@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Dimensions } from 'react-native';
-import { Timer } from "react-native-stopwatch-timer";
-
+import { StyleSheet, Text, View, TouchableHighlight, Dimensions, TouchableOpacity } from 'react-native';
+import { Timer } from  "react-native-stopwatch-timer";
 
 const {height, width} = Dimensions.get('window');
 
@@ -38,13 +37,23 @@ export default class App extends Component {
               options={options}
               handleFinish={handleTimerComplete}
               getTime={this.getFormattedTime} />
-              <View style={styles.button}>
-            <TouchableHighlight onPress={this.toggleTimer}>
-              <Text style={styles.startStop}>{!this.state.timerStart ? "Start" : "Stop"}</Text>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={this.resetTimer}>
-              <Text style={{fontSize: 30}}>Reset</Text>
-            </TouchableHighlight>
+              <View style={styles.timer}>
+            <TouchableOpacity
+              onPress={this.resetTimer}
+              style={[styles.button, {backgroundColor: '#3D3D3D'}]}
+            >
+            <View style={styles.buttonBorder}>
+            <Text style={styles.buttonTitle}>Reset</Text>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.toggleTimer}
+              style={[styles.button, {backgroundColor: '#1B361F'}]}
+            >
+            <View style={styles.buttonBorder}>
+            <Text style={styles.buttonTitle}>Start Stop</Text>
+            </View>
+            </TouchableOpacity>
             </View>
           </View>
         );
@@ -56,11 +65,12 @@ const handleTimerComplete = () => alert("custom completion function");
 const styles = StyleSheet.create({
     container: {
         width: width / 2,
-        height: height / 2 - 30,
+        height: height / 5,
         paddingHorizontal: 20,
         borderWidth: 2,
         borderColor: '#D3D3D3',
         borderRadius: 20,
+        backgroundColor: '#FFF0F5',
       },
       button: {
           flexDirection: 'row',
@@ -68,19 +78,41 @@ const styles = StyleSheet.create({
       },
       startStop: {
         fontSize: 30,
-        backgroundColor: 'red', 
         width: 60, 
         height: 60, 
         justifyContent: 'center', 
         alignItems: 'center', 
         borderRadius: 60,
-      }
+      },
+      timer: {
+        flexDirection: 'row',
+        alignSelf: 'stretch',
+        justifyContent: 'space-between',
+        margin: 5,
+        backgroundColor: '#FFF0F5',
+      },
+      button: {
+        width: 60,
+        height: 60,
+        borderRadius: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      buttonBorder: {
+        width: 60,
+        height: 60,
+        borderRadius: 38,
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      buttonTitle: {
+        fontSize: 15,
+        color: 'white',
+      },
 });
 
 const options = {
-    container: {
-        backgroundColor: 'white',
-      },
     text: {
         fontSize: 38,
         color: 'black',
