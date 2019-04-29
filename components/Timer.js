@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Dimensions, TouchableOpacity } from 'react-native';
-import { Timer } from  "react-native-stopwatch-timer";
+import { StyleSheet, Text, View, TouchableHighlight, Dimensions, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { Timer } from  'react-native-stopwatch-timer';
 
 const {height, width} = Dimensions.get('window');
 
@@ -9,7 +9,8 @@ export default class App extends Component {
         super(props);
         this.state = {
             timerStart: false,
-            totalDuration: this.props.duration,
+            totalMinutesDuration: 2,
+            totalSecondsDuration: 30,
             timerReset: false,
         };
         this.toggleTimer = this.toggleTimer.bind(this);
@@ -28,11 +29,28 @@ export default class App extends Component {
         this.currentTime = time;
     }
 
+    changeMinutes = inputValue => {
+      this.setState({totalMinutesDuration: inputValue });
+    }
+
+    changeSeconds = inputValue => {
+      this.setState({ totalSecondsDuration: (inputValue)});
+    }
+
     render() {
         return (
           <View style={styles.container}>
-            <Text style={{fontSize: 30, fontWeight: 'bold',}}>Timer</Text>
-            <Timer totalDuration={this.state.totalDuration} start={this.state.timerStart}
+            <View style={{flexDirection: 'row'}}>
+            <TextInput value={this.state.totalMinutesDuration} onChangeText={this.changeMinutes} style={{width: width / 6, textAlign: 'right'}}
+            maxLength={2} keyboardType={'numeric'}
+            />
+            <Text style={{fontWeight: 'bold'}}>分</Text>
+            <TextInput value={this.state.totalSecondsDuration} onChangeText={this.changeSeconds} style={{width: width / 6, textAlign: 'right'}}
+            maxLength={2} keyboardType={'numeric'}
+            />
+            <Text style={{fontWeight: 'bold'}}>秒</Text>
+            </View>
+            <Timer totalDuration={(parseInt(this.state.totalMinutesDuration) * 60 + parseInt(this.state.totalSecondsDuration)) * 1000} start={this.state.timerStart}
               reset={this.state.timerReset}
               options={options}
               handleFinish={handleTimerComplete}
@@ -43,7 +61,7 @@ export default class App extends Component {
               style={[styles.button, {backgroundColor: '#3D3D3D'}]}
             >
             <View style={styles.buttonBorder}>
-            <Text style={styles.buttonTitle}>Reset</Text>
+            <Text style={styles.buttonTitle}>Set Reset</Text>
             </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -60,7 +78,7 @@ export default class App extends Component {
     }
 }
 
-const handleTimerComplete = () => alert("custom completion function");
+const handleTimerComplete = () => Alert.alert("Time is come!");
  
 const styles = StyleSheet.create({
     container: {

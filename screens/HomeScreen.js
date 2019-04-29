@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Picker } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Picker, DatePickerIOS } from "react-native";
 
 const pickerData = [
     { value: ''},
@@ -12,8 +12,15 @@ export default class HomeScreen extends React.Component {
             stopWatchNumber: 1,
             lapNumber: 5000,
             multipleMode: 1,
+            chosenDate: new Date(),
         }
     }
+
+    setDate = (newDate) => {
+        this.setState({
+            chosenDate: newDate
+        })
+    };
 
     render(){
         const { navigate } = this.props.navigation;
@@ -49,7 +56,7 @@ export default class HomeScreen extends React.Component {
           <Picker.Item label="9000m" value={9000} />
           <Picker.Item label="10000m" value={10000} />
         </Picker>
-        <Text style={{fontSize: 18, fontWeight: 'bold'}}>ストップウォッチを同時スタートするか、単発で使うか選択</Text>
+        {/* <Text style={{fontSize: 18, fontWeight: 'bold'}}>ストップウォッチを同時スタートするか、単発で使うか選択</Text>
         <Picker
           style={[styles.picker]} itemStyle={styles.pickerItem}
           selectedValue={this.state.multipleMode}
@@ -57,7 +64,7 @@ export default class HomeScreen extends React.Component {
         >
           <Picker.Item label="複数モード" value={1} />
           <Picker.Item label="単発モード" value={2} />
-        </Picker>
+        </Picker> */}
             <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', {count: this.state.stopWatchNumber, lap: this.state.lapNumber, multiple: this.state.multipleMode} )}>
                 <Text style={styles.startText}>開始</Text>
             </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions,ScrollView } from "react-native";
 import StopWatch from '../components/StopWatch';
 import Timer from '../components/Timer';
 
@@ -25,15 +25,19 @@ export default class SWScreen extends React.Component {
         );
       }
       StopWatches.push(
-        <Timer duration={60000}></Timer>
+        <Timer />
       );
 
       return(
       <View style={styles.container}>
+      <ScrollView>
       {/* <TouchableOpacity disabled={this.state.disabled} onPress={this._onPressButton}>
       <Text>Start</Text>
       </TouchableOpacity> */}
+      <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
       {StopWatches}
+      </View>
+      </ScrollView>
       </View>
       );
       }
@@ -41,7 +45,6 @@ export default class SWScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
