@@ -21,7 +21,7 @@ export default class SWScreen extends React.Component {
       let multiple = {multiple: this.props.navigation.state.params.multiple};
       for(let i = 0; i < count; i++){
         StopWatches.push(
-          <StopWatch key={i} count={count} distance={lapNum}></StopWatch>
+          <StopWatch key={i} count={count} distance={lapNum} number={i}></StopWatch>
         );
       }
       StopWatches.push(

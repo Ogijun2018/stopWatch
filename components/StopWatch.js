@@ -173,6 +173,7 @@ export default class App extends Component {
   render() {
     const lap = this.props.lap;
     const distance = this.props.distance;
+    const number = this.props.number + 1;
     const { now, start, laps } = this.state
     const timer = now - start
     //laps[1]..."Lap"を押した時の一番上のラップ
@@ -184,7 +185,7 @@ export default class App extends Component {
         <TextInput
           value={this.state.inputValue}
           onChangeText={this._handleTextChange}
-          placeholder="名前を記入"
+          placeholder={"Number " + number}
           style={{ width: width / 2, height: 30, fontSize: 20, fontWeight: 'bold',}}
         />
         <Timer
