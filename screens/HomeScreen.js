@@ -1,9 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Picker, DatePickerIOS } from "react-native";
-
-const pickerData = [
-    { value: ''},
-];
+import { StyleSheet, Text, View, TouchableOpacity, Picker, Switch } from "react-native";
 
 export default class HomeScreen extends React.Component {
     constructor(props){
@@ -12,18 +8,17 @@ export default class HomeScreen extends React.Component {
             stopWatchNumber: 1,
             lapNumber: 5000,
             multipleMode: 1,
-            chosenDate: new Date(),
+            switching: false,
         }
     }
 
-    setDate = (newDate) => {
-        this.setState({
-            chosenDate: newDate
-        })
-    };
+    switchValue = (value) => {
+        this.setState({ switching: value });
+    }
 
     render(){
         const { navigate } = this.props.navigation;
+        const switching = this.state.switching;
         return(
             <View style={styles.container}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>ストップウォッチの個数を選択してください</Text>
@@ -69,7 +64,13 @@ export default class HomeScreen extends React.Component {
           <Picker.Item label="複数モード" value={1} />
           <Picker.Item label="単発モード" value={2} />
         </Picker> */}
-            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', {count: this.state.stopWatchNumber, lap: this.state.lapNumber, multiple: this.state.multipleMode} )}>
+        <Text>タイマーの有無</Text>
+            <Switch 
+                style = {styles.switch}
+                onValueChange = {this.switchValue}
+                value = { switching }
+            />
+            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', {count: this.state.stopWatchNumber, lap: this.state.lapNumber, multiple: this.state.multipleMode, timer: switching} )}>
                 <Text style={styles.startText}>開始</Text>
             </TouchableOpacity>
             </View>
@@ -103,4 +104,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#C0C0C0',
         borderRadius: 20,
     },
+    switch: {
+        margin:20,
+    }
 });

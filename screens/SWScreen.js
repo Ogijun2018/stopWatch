@@ -17,6 +17,7 @@ export default class SWScreen extends React.Component {
     render() {
       let StopWatches = [];
       const count = this.props.navigation.state.params.count;
+      const switching = this.props.navigation.state.params.timer;
       const lapNum = this.props.navigation.state.params.lap;
       let multiple = {multiple: this.props.navigation.state.params.multiple};
       for(let i = 0; i < count; i++){
@@ -24,9 +25,11 @@ export default class SWScreen extends React.Component {
           <StopWatch key={i} count={count} distance={lapNum} number={i}></StopWatch>
         );
       }
+      if(switching === true){
       StopWatches.push(
         <Timer />
       );
+      }
 
       return(
       <View style={styles.container}>

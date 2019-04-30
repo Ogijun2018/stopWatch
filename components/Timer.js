@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: '#D3D3D3',
         borderRadius: 20,
-        backgroundColor: '#FFF0F5',
+        backgroundColor: '#9FD2FC',
       },
       button: {
           flexDirection: 'row',
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'space-between',
         margin: 5,
-        backgroundColor: '#FFF0F5',
+        backgroundColor: '#9FD2FC',
       },
       button: {
         width: 60,
