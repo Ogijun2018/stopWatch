@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     picker: {
-        width: 300,
+        height: 200,
+        width: 200,
         backgroundColor: '#FFF',
     },
     pickerItem: {

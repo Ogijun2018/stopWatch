@@ -21,15 +21,15 @@ function Timer({ interval, style }) {
 
 function RoundButton({ title, color, background, onPress, disabled }) {
   return (
-    <TouchableOpacity
-      onPress={() => !disabled && onPress()}
+    <View
+      onTouchEnd={() => !disabled && onPress()}
       style={[ styles.button, { backgroundColor: background }]}
       activeOpacity={disabled ? 1.0 : 0.7}
     >
       <View style={styles.buttonBorder}>
         <Text style={[ styles.buttonTitle, { color }]}>{title}</Text>
       </View>
-    </TouchableOpacity>
+    </View>
   )
 }
 function Lap({ number, interval, fastest, slowest }) {
