@@ -3,8 +3,6 @@ import { StyleSheet, View, Dimensions, ScrollView, KeyboardAvoidingView } from "
 import StopWatch from '../components/StopWatch';
 import Timer from '../components/Timer';
 
-const { height, width } = Dimensions.get('window');
-
 export default class SWScreen extends React.Component {
     render() {
       let StopWatches = [];
@@ -25,7 +23,7 @@ export default class SWScreen extends React.Component {
       }
 
       return(
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <KeyboardAvoidingView behavior="padding">
       <ScrollView>
       <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
       {StopWatches}
@@ -35,17 +33,3 @@ export default class SWScreen extends React.Component {
       );
       }
 } 
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  multipleStart: {
-    position: 'absolute',
-    width: width,
-    height: height,
-    backgroundColor: 'gray',
-    opacity: 0.4,
-  },
-})

@@ -263,7 +263,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     width: width / 2,
-    height: height / 2 - 30,
+    height: height / 2 - 50,
     paddingHorizontal: 20,
     borderWidth: 2,
     borderColor: '#D3D3D3',

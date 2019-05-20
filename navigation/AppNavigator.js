@@ -9,13 +9,13 @@ const Stack = createStackNavigator(
     Home: {
       screen: HomeScreen,
       navigationOptions: () => ({
-        title: '設定画面',
+        title: 'Setting',
       }),
     },
     Watch: {
       screen: SWScreen,
       navigationOptions: () => ({
-        title: 'ストップウォッチ',
+        title: 'Stop Watch',
       }),
     },
     Result: {
