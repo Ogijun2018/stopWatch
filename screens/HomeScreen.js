@@ -55,23 +55,17 @@ export default class HomeScreen extends React.Component {
           <Picker.Item label="9000m" value={9000} />
           <Picker.Item label="10000m" value={10000} />
         </Picker>
-        {/* <Text style={{fontSize: 18, fontWeight: 'bold'}}>ストップウォッチを同時スタートするか、単発で使うか選択</Text>
-        <Picker
-          style={[styles.picker]} itemStyle={styles.pickerItem}
-          selectedValue={this.state.multipleMode}
-          onValueChange={(itemValue) => this.setState({multipleMode: itemValue})}
-        >
-          <Picker.Item label="複数モード" value={1} />
-          <Picker.Item label="単発モード" value={2} />
-        </Picker> */}
         <Text>タイマーの有無</Text>
             <Switch 
                 style = {styles.switch}
                 onValueChange = {this.switchValue}
                 value = { switching }
             />
-            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', {count: this.state.stopWatchNumber, lap: this.state.lapNumber, multiple: this.state.multipleMode, timer: switching} )}>
-                <Text style={styles.startText}>開始</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', {count: this.state.stopWatchNumber, lap: this.state.lapNumber, timer: switching, simultaneous: true} )}>
+                <Text style={styles.startText}>同時スタート</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigate('Watch', {count: this.state.stopWatchNumber, lap: this.state.lapNumber, timer: switching, simultaneous: false} )}>
+                <Text style={styles.startText}>通常スタート</Text>
             </TouchableOpacity>
             </View>
         );

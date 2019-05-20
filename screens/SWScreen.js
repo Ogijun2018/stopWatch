@@ -1,30 +1,23 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions,ScrollView,KeyboardAvoidingView } from "react-native";
+import { StyleSheet, View, Dimensions, ScrollView, KeyboardAvoidingView } from "react-native";
 import StopWatch from '../components/StopWatch';
 import Timer from '../components/Timer';
 
 const { height, width } = Dimensions.get('window');
 
 export default class SWScreen extends React.Component {
-  
-    state = {disabled: false}
-
-    _onPressButton = () => {
-      console.log('changed multiple');
-      this.setState({disabled: true});
-    }
-
     render() {
       let StopWatches = [];
       const count = this.props.navigation.state.params.count;
       const switching = this.props.navigation.state.params.timer;
       const lapNum = this.props.navigation.state.params.lap;
-      let multiple = {multiple: this.props.navigation.state.params.multiple};
+      let simultaneous = this.props.navigation.state.params.simultaneous;
       for(let i = 0; i < count; i++){
         StopWatches.push(
-          <StopWatch key={i} count={count} distance={lapNum} number={i}></StopWatch>
+          <StopWatch distance={lapNum} simultaneous={simultaneous}></StopWatch>
         );
       }
+      //タイマーのスイッチ
       if(switching === true){
       StopWatches.push(
         <Timer />
@@ -34,9 +27,6 @@ export default class SWScreen extends React.Component {
       return(
       <KeyboardAvoidingView style={styles.container} behavior="padding">
       <ScrollView>
-      {/* <TouchableOpacity disabled={this.state.disabled} onPress={this._onPressButton}>
-      <Text>Start</Text>
-      </TouchableOpacity> */}
       <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
       {StopWatches}
       </View>

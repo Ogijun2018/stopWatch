@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
-  StyleSheet, Text, View, ScrollView, TouchableOpacity, Dimensions, TextInput
-  } from 'react-native'
-import moment from 'moment'
+  StyleSheet, Text, View, ScrollView, Dimensions, TextInput
+  } from 'react-native';
+import moment from 'moment';
 
 const { height, width } = Dimensions.get('window');
 
@@ -86,6 +86,13 @@ export default class App extends Component {
       laps: [ ],
     }
   }
+
+  componentDidMount() {
+    if(this.props.simultaneous === true){
+    this.start();
+    }
+  }
+
   componentWillUnmount() {
     clearInterval(this.timer)
   }
@@ -171,9 +178,7 @@ export default class App extends Component {
   }
 
   render() {
-    const lap = this.props.lap;
     const distance = this.props.distance;
-    const number = this.props.number + 1;
     const { now, start, laps } = this.state
     const timer = now - start
     //laps[1]..."Lap"を押した時の一番上のラップ
@@ -185,7 +190,7 @@ export default class App extends Component {
         <TextInput
           value={this.state.inputValue}
           onChangeText={this._handleTextChange}
-          placeholder={"Number " + number}
+          placeholder={"名前を記入"}
           style={{ width: width / 2, height: 30, fontSize: 20, fontWeight: 'bold',}}
         />
         <Timer
