@@ -5,9 +5,8 @@ export default class HomeScreen extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            stopWatchNumber: 1,
+            stopWatchNumber: 4,
             lapNumber: 5000,
-            multipleMode: 1,
             switching: false,
         }
     }
@@ -21,8 +20,9 @@ export default class HomeScreen extends React.Component {
         const switching = this.state.switching;
         return(
             <View style={styles.container}>
+                <View style={styles.pickerRow}>
                 <View style={styles.quantitySelection}>
-                <Text style={{fontSize: 18, fontWeight: 'bold'}}>ストップウォッチの個数を選択</Text>
+                <Text style={{fontSize: 18, fontWeight: 'bold'}}>個数を選択</Text>
                 <Picker
                     style={[styles.picker]} itemStyle={styles.pickerItem}
                     selectedValue={this.state.stopWatchNumber}
@@ -39,7 +39,7 @@ export default class HomeScreen extends React.Component {
                 </Picker>
                 </View>
                 <View style={styles.distanceSelection}>
-                <Text style={{fontSize: 18, fontWeight: 'bold'}}>計測距離を選択</Text>
+                <Text style={{fontSize: 18, fontWeight: 'bold'}}>距離を選択</Text>
                 <Picker
                     style={[styles.picker]} itemStyle={styles.pickerItem}
                     selectedValue={this.state.lapNumber}
@@ -58,6 +58,7 @@ export default class HomeScreen extends React.Component {
                     <Picker.Item label="9000m" value={9000} />
                     <Picker.Item label="10000m" value={10000} />
                 </Picker>
+                </View>
                 </View>
                 <View style={styles.timerSelection}>
                 <Text style={{fontWeight: 'bold'}}>タイマー</Text>
@@ -88,6 +89,9 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         paddingBottom: 30,
     },
+    pickerRow: {
+        flexDirection: 'row',
+    },
     quantitySelection: {
         flex: 1,
         alignItems: 'center',
@@ -97,9 +101,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     timerSelection: {
-        flex: 0.5,
+        flex: 0.3,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     buttonWrap: {
         flex: 1,
@@ -129,14 +133,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     button: {
-        width: 200,
-        height: 200,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#44aeea',
-        borderRadius: 100,
+        borderRadius: 30,
+        padding: 10,
     },
     switch: {
-        margin:20,
+       margin:20,
     }
 });
