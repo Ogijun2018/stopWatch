@@ -178,6 +178,7 @@ export default class App extends Component {
   }
 
   render() {
+    console.log('render');
     const distance = this.props.distance;
     const { now, start, laps } = this.state
     const timer = now - start

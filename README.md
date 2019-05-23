@@ -3,6 +3,11 @@ UECTFのマネさん用ストップウォッチアプリ
 随時更新予定。
 
 更新記録
+5/21
+```
+- 全てのストップウォッチを同時スタートするボタンを作成
+- レイアウトの整理
+```
 
 4/30
 ```
@@ -20,19 +25,13 @@ UECTFのマネさん用ストップウォッチアプリ
 - 測定する距離を選択できるようにした
 - 殘り周数を表示させた
 ```
-Next -> 全部のストップウォッチを同時にスタートさせるボタンをつくる
+Next -> Androidでの動作を軽くする・Result画面を作成する
 
 ## 環境構築手順
 ※ 事前に Node.js と yarn　をグローバルにインストールする。
 
-```
-$ git@github.com:eishis/dekita.git
-$ cd dekita
-$ yarn install
-$ yarn start
-```
-
 `yarn start` してしばらく経つと、下記のオプションが選べるようになる。
+
 ```
   To run the app with live reloading, choose one of:
   • Scan the QR code above with the Expo app (Android) or the Camera app (iOS).
